@@ -7716,7 +7716,15 @@ angular.module('ui.grid')
     }
 
     var rowIndex = Math.ceil(Math.min(maxRowIndex, maxRowIndex * scrollPercentage));
-
+    // When data is consisted of multiple rows, it should be set using adjustRowIndexWhileScrolling of grid.options 
+    // If you don't set that, while you do scrolling vertically might be rendered incorrectly 
+    if (self.grid.options.adjustRowIndexWhileScrolling) {
+      var shouldAdjustIndex = rowIndex % self.grid.options.adjustRowIndexWhileScrolling
+      if (shouldAdjustIndex) {
+        rowIndex = Math.max(0, rowIndex - shouldAdjustIndex)  
+      }      
+    }
+    
     // Define a max row index that we can't scroll past
     if (rowIndex > maxRowIndex) {
       rowIndex = maxRowIndex;
