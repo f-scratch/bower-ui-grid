@@ -7724,7 +7724,6 @@ angular.module('ui.grid')
         rowIndex = Math.max(0, rowIndex - shouldAdjustIndex)  
       }      
     }
-    
     // Define a max row index that we can't scroll past
     if (rowIndex > maxRowIndex) {
       rowIndex = maxRowIndex;
